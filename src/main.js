@@ -51,7 +51,7 @@ map.on('style.load', () => {
   // Map layers
   addRouteLayer(map);
   addCarRouteLayer(map);
-  addStationMarkers(map);
+  const stationMarkers = addStationMarkers(map);
 
   // Position markers
   addDotMarker(map, 'train-pos', '#E63946');
@@ -104,6 +104,7 @@ map.on('style.load', () => {
       });
 
       camera.update(state);
+      stationMarkers.setCurrentStation(state.stationIndex);
     }
 
     if (carState) {

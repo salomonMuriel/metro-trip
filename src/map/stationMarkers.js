@@ -1,9 +1,13 @@
 import maplibregl from 'maplibre-gl';
 import { STATIONS } from '../config.js';
 
+const LABEL_ZOOM_THRESHOLD = 14;
+
 export function addStationMarkers(map) {
-  STATIONS.forEach((station) => {
-    // Dot marker
+  const labelMarkers = [];
+
+  STATIONS.forEach((station, i) => {
+    // Dot marker (always visible)
     const dotEl = document.createElement('div');
     dotEl.className = 'station-marker-dot';
 
@@ -11,13 +15,41 @@ export function addStationMarkers(map) {
       .setLngLat([station.lng, station.lat])
       .addTo(map);
 
-    // Label marker
+    // Label marker (visibility controlled)
     const labelEl = document.createElement('div');
     labelEl.className = 'station-marker';
     labelEl.textContent = station.name;
+    labelEl.style.display = 'none';
 
-    new maplibregl.Marker({ element: labelEl, offset: [0, -18] })
+    const marker = new maplibregl.Marker({ element: labelEl, offset: [0, -18] })
       .setLngLat([station.lng, station.lat])
       .addTo(map);
+
+    labelMarkers.push({ el: labelEl, index: i });
   });
+
+  let currentStationIndex = 0;
+
+  function updateLabels() {
+    const zoom = map.getZoom();
+    const showAll = zoom >= LABEL_ZOOM_THRESHOLD;
+
+    labelMarkers.forEach(({ el, index }) => {
+      if (showAll || index === currentStationIndex) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  map.on('zoom', updateLabels);
+  updateLabels();
+
+  return {
+    setCurrentStation(index) {
+      currentStationIndex = index;
+      updateLabels();
+    },
+  };
 }
