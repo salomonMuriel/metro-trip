@@ -20,6 +20,13 @@ body {
   height: 100%;
 }
 
+@media (max-width: 639px) {
+  .maplibregl-ctrl-bottom-right,
+  .maplibregl-ctrl-bottom-left {
+    bottom: 60px;
+  }
+}
+
 /* ========================
    OVERLAY — Desktop
    ======================== */
