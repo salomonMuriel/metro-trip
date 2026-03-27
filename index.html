@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Metro de Bogota - Linea 1</title>
+  <link rel="stylesheet" href="/src/ui/styles.css" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <div id="overlay">
+    <!-- Slim bar: always visible -->
+    <div id="slim-bar">
+      <div id="slim-left">
+        <div id="logo">M</div>
+        <div id="slim-station">
+          <div id="station-label">Proxima estacion</div>
+          <div id="station-name">Gibraltar</div>
+        </div>
+      </div>
+      <div id="slim-right">
+        <span class="slim-stat" id="trip-time">0:00</span>
+        <span class="slim-unit">min</span>
+        <span class="slim-stat" id="trip-km">0.0</span>
+        <span class="slim-unit">km</span>
+        <button id="btn-expand" class="expand-btn" title="Expand">&#9650;</button>
+      </div>
+    </div>
+
+    <!-- Expandable detail panel -->
+    <div id="detail-panel">
+      <div id="trip-stats">
+        <div class="stat">
+          <span class="stat-value" id="trip-direction">&#8594;</span>
+          <span class="stat-unit" id="trip-dest">Calle 72</span>
+        </div>
+      </div>
+
+      <div id="progress-container">
+        <div class="progress-label"><span class="dot metro-dot"></span> Metro</div>
+        <div id="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="station-dots"></div>
+      </div>
+
+      <div id="car-comparison" class="vehicle-comparison">
+        <div class="progress-label"><span class="dot car-dot"></span> Auto (15.4 km/h)</div>
+        <div class="compare-progress-bar">
+          <div id="car-progress-fill" class="compare-fill car-fill"></div>
+        </div>
+        <div class="compare-stats">
+          <span><span id="car-time">0:00</span> min</span>
+          <span><span id="car-km">0.0</span> km</span>
+        </div>
+      </div>
+
+      <div id="moto-comparison" class="vehicle-comparison">
+        <div class="progress-label"><span class="dot moto-dot"></span> Moto (22 km/h)</div>
+        <div class="compare-progress-bar">
+          <div id="moto-progress-fill" class="compare-fill moto-fill"></div>
+        </div>
+        <div class="compare-stats">
+          <span><span id="moto-time">0:00</span> min</span>
+          <span><span id="moto-km">0.0</span> km</span>
+        </div>
+      </div>
+
+      <div id="controls">
+        <div class="control-group">
+          <button id="btn-restart" class="control-btn" title="Restart">&#8634;</button>
+          <button id="btn-play" class="control-btn active" title="Play/Pause">
+            <span class="icon-pause">&#9646;&#9646;</span>
+            <span class="icon-play" style="display:none">&#9654;</span>
+          </button>
+          <button id="btn-1x" class="speed-btn active">1x</button>
+          <button id="btn-2x" class="speed-btn">2x</button>
+          <button id="btn-4x" class="speed-btn">4x</button>
+        </div>
+        <div class="control-divider"></div>
+        <div class="control-group">
+          <button class="view-btn active" data-view="overhead" title="Map view">Map</button>
+          <button class="view-btn" data-view="isometric" title="3D view">3D</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
