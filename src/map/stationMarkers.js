@@ -31,15 +31,18 @@ export function addStationMarkers(map) {
   let currentStationIndex = 0;
 
   function updateLabels() {
+    const isMobile = window.innerWidth < 640;
+
+    if (!isMobile) {
+      labelMarkers.forEach(({ el }) => { el.style.display = ''; });
+      return;
+    }
+
     const zoom = map.getZoom();
     const showAll = zoom >= LABEL_ZOOM_THRESHOLD;
 
     labelMarkers.forEach(({ el, index }) => {
-      if (showAll || index === currentStationIndex) {
-        el.style.display = '';
-      } else {
-        el.style.display = 'none';
-      }
+      el.style.display = (showAll || index === currentStationIndex) ? '' : 'none';
     });
   }
 
