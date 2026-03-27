@@ -28,7 +28,7 @@ export function createMap() {
       ],
     },
     center: MAP_CENTER,
-    zoom: 12,
+    zoom: window.innerWidth < 640 ? 10.5 : 12,
     pitch: 0,
     bearing: 0,
     antialias: true,
